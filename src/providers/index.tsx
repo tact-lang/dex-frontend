@@ -1,17 +1,23 @@
 import { FC, PropsWithChildren } from 'react'
 import { TonConnectUIProvider } from '@tonconnect/ui-react'
-import { ThemeProvider as ChakraUIProvider } from '@/styles/snippets/ThemeProvider'
+import { Toaster } from 'react-hot-toast'
 
-type TAppProvidersProps = PropsWithChildren
+// This manifest is used by @tonconnect/ui-react to connect to TON wallet
+const manifestUrl = 'https://raw.githubusercontent.com/ton-blockchain/minter/main/public/tonconnect-manifest.json'
 
-const AppProviders: FC<TAppProvidersProps> = ({ children }) => {
+export const AppProviders: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <ChakraUIProvider>
-      <TonConnectUIProvider manifestUrl='/tonconnect-manifest.json'>
-        {children}
-      </TonConnectUIProvider>
-    </ChakraUIProvider>
+    <TonConnectUIProvider manifestUrl={manifestUrl}>
+      {children}
+      <Toaster
+        position='bottom-right'
+        toastOptions={{
+          style: {
+            background: '#333',
+            color: '#fff',
+          },
+        }}
+      />
+    </TonConnectUIProvider>
   )
 }
-
-export { AppProviders }

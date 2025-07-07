@@ -15,20 +15,10 @@
     <script>
       // Single Page App hack for GitHub Pages
       // https://github.com/rafgraph/spa-github-pages
-      (function() {
-        var redirect = sessionStorage.redirect;
-        delete sessionStorage.redirect;
-        if (redirect && redirect != location.href) {
-          history.replaceState(null, null, redirect);
-        }
-      })();
+      sessionStorage.redirect = location.href;
     </script>
+    <meta http-equiv="refresh" content="0;URL='/t-dex-frontend/'"></meta>
   </head>
   <body>
-    <div id="root"></div>
-    <script
-      type="module"
-      src="./src/main.tsx"
-    ></script>
   </body>
 </html>

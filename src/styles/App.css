@@ -1,0 +1,213 @@
+:root {
+  --color-primary: #0052ff;
+  --color-primary-dark: #0043cc;
+  --color-background: #0d1117;
+  --color-surface: #161b22;
+  --color-text: #c9d1d9;
+  --color-text-secondary: #8b949e;
+  --color-border: #30363d;
+}
+
+body {
+  margin: 0;
+}
+
+.app {
+  min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
+
+.app-nav {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 1rem 0;
+}
+
+.nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.nav-logo {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color 0.2s;
+  cursor: default;
+}
+
+.nav-logo:hover {
+  color: var(--color-primary);
+}
+
+.network-label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+  font-size: 0.9rem;
+}
+
+.nav-link:hover {
+  color: var(--color-primary);
+}
+
+.home {
+  max-width: 800px;
+  margin: 6rem auto;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.home h1 {
+  font-family: var(--font-sans);
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.home p {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 3rem;
+  line-height: 1.6;
+}
+
+.cta-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.cta-button {
+  font-family: var(--font-sans);
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: var(--color-primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  font-size: 0.9rem;
+}
+
+.cta-button:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.docs-link {
+  font-family: var(--font-sans);
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s;
+  border: 1px solid var(--color-border);
+  font-size: 0.9rem;
+}
+
+.docs-link:hover {
+  background-color: var(--color-background);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .nav-content {
+    padding: 0 1rem;
+  }
+
+  .nav-logo {
+    font-size: 1.25rem;
+  }
+
+  .home {
+    margin: 4rem auto;
+    padding: 0 1rem;
+  }
+
+  .home h1 {
+    font-size: 2rem;
+  }
+
+  .home p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .cta-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cta-button,
+  .docs-link {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .nav-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .home h1 {
+    font-size: 1.75rem;
+  }
+
+  .home p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Add viewport meta tag to ensure proper scaling on mobile devices */
+@viewport {
+  width: device-width;
+  zoom: 1.0;
+} 
