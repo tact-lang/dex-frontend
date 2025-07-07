@@ -58,7 +58,6 @@ export async function onJettonAddressInput({
   const factory = await getFactory(tonClient)
   const jettonVaultAddr = await factory.getJettonVaultAddr(jettonAddress)
 
-  console.log(jettonVaultAddr.toString())
   if (setVaultAddress) setVaultAddress(jettonVaultAddr.toString())
 
   const jettonMaster = tonClient.open(JettonMinterFeatureRich.fromAddress(jettonAddress))
@@ -138,9 +137,6 @@ export async function onBalanceInput({
 }): Promise<void> {
   const tonClient = getTonClient('testnet')
   const factory = await getFactory(tonClient)
-
-  console.log(`token from: ${JSON.stringify(fromToken)}`)
-  console.log(`to from: ${JSON.stringify(toToken)}`)
 
   const vaultFrom = await getVaultFromToken(tonClient, fromToken)
   const vaultTo = await getVaultFromToken(tonClient, toToken)
@@ -255,9 +251,6 @@ export async function handleFromSwapAction(
 ) {
   const tonClient = getTonClient('testnet')
   const factory = await getFactory(tonClient)
-
-  console.log(`token from: ${JSON.stringify(fromToken)}`)
-  console.log(`to from: ${JSON.stringify(toToken)}`)
 
   const vaultFrom = await getVaultFromToken(tonClient, fromToken)
   const vaultTo = await getVaultFromToken(tonClient, toToken)
