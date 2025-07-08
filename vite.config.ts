@@ -5,7 +5,7 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
-  base: '/t-dex-frontend/',
+  base: '/dex-frontend/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
