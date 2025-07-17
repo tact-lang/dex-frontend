@@ -4,7 +4,7 @@ import { useNetwork } from '../contexts/NetworkContext'
 import { onJettonAddressInput, Token } from '../services/dex'
 import TonLogo from '../assets/ton-logo.svg'
 import JettonLogo from '../assets/jetton-logo.svg'
-import toast from 'react-hot-toast'
+import { toaster } from '@/components/ui/toaster'
 
 type Props = {
   tokens: Token[]
@@ -130,7 +130,11 @@ export default function TokenSelector({
     } catch (err) {
       if (setJettonAddressStatus) setJettonAddressStatus('error');
 
-      toast.error(typeof err === 'string' ? err : (err instanceof Error ? err.message : String(err)))
+      toaster.create({
+        title: 'Error',
+        description: typeof err === 'string' ? err : (err instanceof Error ? err.message : String(err)),
+        type: 'error',
+      })
     }
   };
 
