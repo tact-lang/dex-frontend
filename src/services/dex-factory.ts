@@ -3,7 +3,7 @@ import { Factory } from './wrappers/DEX_Factory'
 import { TonVault } from './wrappers/DEX_TonVault'
 import { JettonVault } from './wrappers/DEX_JettonVault'
 import { AmmPool } from './wrappers/DEX_AmmPool'
-import toast from 'react-hot-toast'
+import { toaster } from '@/components/ui/toaster'
 
 const DEX_FACTORY_ADDRESS = Address.parse('EQDR9j1SuiGtbSi7NZNgNwlDPIWZFEN5BLMz6AOd-IpGuslM')
 
@@ -22,7 +22,11 @@ export const getFactory = async (ton: TonClient) => {
     return factory
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
-    toast.error('Failed to get DEX factory')
+    toaster.create({
+      title: 'Error',
+      description: 'Failed to get DEX factory',
+      type: 'error',
+    })
     throw new Error('Failed to get DEX factory')
   }
 }
@@ -39,7 +43,11 @@ export const getTonVault = async (ton: TonClient) => {
     return tonVault
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
-    toast.error('Failed to get TON Vault')
+    toaster.create({
+      title: 'Error',
+      description: 'Failed to get TON Vault',
+      type: 'error',
+    })
     throw new Error('Failed to get TON Vault address')
   }
 }
@@ -54,9 +62,12 @@ export const getJettonVaultFromAddress = async (ton: TonClient, jettonVaultAddre
 
     const jettonVault = ton.open(JettonVault.fromAddress(jettonVaultAddress))
     return jettonVault
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
-    toast.error('Failed to get Jetton Vault')
+    toaster.create({
+      title: 'Error',
+      description: 'Failed to get Jetton Vault',
+      type: 'error',
+    })
     throw new Error('Failed to get Jetton Vault address')
   }
 }
@@ -73,7 +84,11 @@ export const getAmmPoolFromAddress = async (ton: TonClient, ammPoolAddress: Addr
     return ammPool
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
-    toast.error('Amm Pool for this pair of assets is not initialized')
+    toaster.create({
+      title: 'Error',
+      description: 'AMM Pool for this pair of assets is not initialized',
+      type: 'error',
+    })
     throw new Error('Failed to get Jetton Vault address')
   }
 }
