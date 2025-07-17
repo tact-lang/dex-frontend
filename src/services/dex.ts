@@ -70,16 +70,21 @@ export async function onJettonAddressInput({
   let userBalance = 0n
 
   if (typeof userWalletAddress !== 'undefined') {
-    const userJettonWalletAddress = await jettonMaster.getGetWalletAddress(
-      Address.parse(userWalletAddress),
-    )
+    try {
+      const userJettonWalletAddress = await jettonMaster.getGetWalletAddress(
+        Address.parse(userWalletAddress),
+      )
 
-    const userJettonWallet = tonClient.open(
-      JettonWalletFeatureRich.fromAddress(userJettonWalletAddress),
-    )
+      const userJettonWallet = tonClient.open(
+        JettonWalletFeatureRich.fromAddress(userJettonWalletAddress),
+      )
 
-    const userJettonData = await userJettonWallet.getGetWalletData()
-    userBalance = userJettonData.balance
+      const userJettonData = await userJettonWallet.getGetWalletData()
+      userBalance = userJettonData.balance
+    } catch (error) {
+      console.error('Failed to get user jetton balance:', error)
+      userBalance = 0n
+    }
   }
 
   // TODO: get actual jetton info here
