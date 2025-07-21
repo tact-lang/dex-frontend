@@ -85,7 +85,7 @@ export default function SlippageSettingsDialog({
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner backdropFilter="blur(4px)">
-          <Dialog.Content maxW="md" mx={4} bg={bgColor}>
+          <Dialog.Content maxW="md" mx={4} bg={bgColor} data-testid="slippage-settings-dialog">
             <Dialog.Header>
               <Dialog.Title>Settings</Dialog.Title>
             </Dialog.Header>
@@ -129,6 +129,7 @@ export default function SlippageSettingsDialog({
                         borderColor: 'gray.200',
                         boxShadow: '0 0 0 1px gray.200',
                       }}
+                      data-testid="slippage-input"
                     />
                     <Text
                       fontSize="sm"
@@ -175,6 +176,7 @@ export default function SlippageSettingsDialog({
                             color: isSelected ? 'black' : 'white',
                           }}
                           transition="all 0.2s"
+                          data-testid={`slippage-preset-${preset}`}
                         >
                           {preset}%
                         </Button>
@@ -198,6 +200,7 @@ export default function SlippageSettingsDialog({
                 border="none"
                 _focus={{ border: 'none', boxShadow: 'none' }}
                 _focusVisible={{ border: 'none', boxShadow: 'none' }}
+                data-testid="slippage-done-button"
               >
                 Done
               </Button>

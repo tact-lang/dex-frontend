@@ -416,7 +416,7 @@ export default function Swap() {
   }
 
   return (
-    <Card.Root variant="subtle" p={6}>
+    <Card.Root variant="subtle" p={6} data-testid="swap-card">
       <Flex justify="space-between" align="center" mb={6}>
         <Card.Header p={0}>
           <Text fontSize="xl" fontWeight="bold">Swap</Text>
@@ -430,6 +430,7 @@ export default function Swap() {
             border="none"
             _focus={{ border: "none", boxShadow: "none" }}
             _focusVisible={{ border: "none", boxShadow: "none" }}
+            data-testid="settings-button"
           >
             <svg
               width="16"
@@ -496,6 +497,7 @@ export default function Swap() {
             _focus={{ border: "none", boxShadow: "none" }}
             _focusVisible={{ border: "none", boxShadow: "none" }}
             transition="all 0.3s ease"
+            data-testid="swap-direction-button"
           >
             <svg
               width="16"
@@ -532,7 +534,7 @@ export default function Swap() {
            }
          />
       </Stack>
-      <Box mt={6} p={4} borderRadius="md">
+      <Box mt={6} p={4} borderRadius="md" data-testid="price-info">
         {toToken ? (
           <DataList.Root orientation="horizontal">
             <DataList.Item>
@@ -561,6 +563,7 @@ export default function Swap() {
         border="none"
         _focus={{ border: "none", boxShadow: "none" }}
         _focusVisible={{ border: "none", boxShadow: "none" }}
+        data-testid="swap-button"
       >
         {!userAddress
           ? 'Connect Wallet'

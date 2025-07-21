@@ -177,7 +177,7 @@ export default function TokenSelectorModal({
     <Dialog.Root open={isOpen} onOpenChange={(details) => !details.open && onClose()} size="md" placement="center">
       <Dialog.Backdrop/>
       <Dialog.Positioner backdropFilter={'blur(4px)'}>
-        <Dialog.Content bg={bgColor} maxH="80vh">
+        <Dialog.Content bg={bgColor} maxH="80vh" data-testid="token-selector-modal">
           <Dialog.Header pb={2}>
             <Dialog.Title fontSize="xl" fontWeight="bold">Select token</Dialog.Title>
           </Dialog.Header>
@@ -194,6 +194,7 @@ export default function TokenSelectorModal({
                 borderColor={borderColor}
                 _focus={{ borderColor: 'blue.500', boxShadow: '0 0 0 1px blue.500' }}
                 pl={10}
+                data-testid="token-search-input"
               />
               <Box position="absolute" left={3} top="50%" transform="translateY(-50%)" pointerEvents="none">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -292,6 +293,7 @@ export default function TokenSelectorModal({
                     _focus={!isDisabled ? { borderColor: 'blue.500' } : {}}
                     opacity={isDisabled ? 0.5 : 1}
                     bg={isDisabled ? useColorModeValue('gray.50', 'gray.800') : 'transparent'}
+                    data-testid={`token-item-${token.symbol}`}
                   >
                     <Image
                       src={getLogoSrc(token)}

@@ -149,7 +149,7 @@ export default function TokenSelector({
     addr.length > 12 ? `${addr.slice(0, 4)}...${addr.slice(-4)}` : addr;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }} data-testid="token-selector">
       <div
         className='tact-dropdown'
         ref={dropdownRef}
@@ -174,6 +174,7 @@ export default function TokenSelector({
             alignItems: 'center',
             justifyContent: 'space-between',
           }}
+          data-testid="token-selector-button"
         >
           {showPreview && selected ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexGrow: 1 }}>
@@ -199,6 +200,7 @@ export default function TokenSelector({
               zIndex: 10,
               overflow: 'hidden',
             }}
+            data-testid="token-selector-dropdown"
           >
             <div
               className='tact-dropdown-item'
@@ -210,6 +212,7 @@ export default function TokenSelector({
                 background: mode === 'ton' ? '#181a20' : 'none',
               }}
               onClick={() => handleModeChange('ton')}
+              data-testid="token-selector-ton-option"
             >
               TON
             </div>
@@ -223,6 +226,7 @@ export default function TokenSelector({
                 background: mode === 'jetton' ? '#181a20' : 'none',
               }}
               onClick={() => handleModeChange('jetton')}
+              data-testid="token-selector-jetton-option"
             >
               Custom Jetton
             </div>
@@ -261,6 +265,7 @@ export default function TokenSelector({
                 : undefined,
             transition: 'border 0.2s, box-shadow 0.2s',
           }}
+          data-testid="jetton-address-input"
         />
       )}
     </div>

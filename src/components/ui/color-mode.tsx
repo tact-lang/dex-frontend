@@ -68,6 +68,7 @@ export const ColorModeButton = React.forwardRef<
             height: "5",
           },
         }}
+        data-testid="color-mode-toggle"
       >
         <ColorModeIcon />
       </IconButton>

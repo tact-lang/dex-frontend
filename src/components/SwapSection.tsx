@@ -61,7 +61,7 @@ export const SwapSection: React.FC<SwapSectionProps> = ({
     _hover: { borderColor: "gray.300", borderRightWidth: 0 },
   };
   return (
-    <Box>
+    <Box data-testid="swap-section">
       <Flex justify="space-between" align="center" mb={3}>
         <Text fontWeight={"medium"} fontSize={16}>{title}</Text>
         <Text fontSize="sm" color="gray.500">
@@ -71,6 +71,7 @@ export const SwapSection: React.FC<SwapSectionProps> = ({
               color="blue.500"
               cursor="pointer"
               onClick={onBalanceClick}
+              data-testid="balance-clickable"
             >
               {balance}
             </Text>
@@ -88,6 +89,7 @@ export const SwapSection: React.FC<SwapSectionProps> = ({
           justifyContent="flex-start"
           minW="140px"
           {...defaultButtonStyle}
+          data-testid="token-select-button"
         >
           {token ? (
             <Flex align="center" gap={2}>
@@ -117,6 +119,7 @@ export const SwapSection: React.FC<SwapSectionProps> = ({
             h="16"
             textAlign="right"
             {...defaultInputStyle}
+            data-testid="amount-input"
           />
         </Stack>
       </Flex>

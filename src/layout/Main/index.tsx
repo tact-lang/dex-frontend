@@ -8,6 +8,7 @@ const Main: FC<TMainProps> = ({ children }) => {
     <Flex
       flex={1}
       as={'main'}
+      data-testid="main"
     >
       {children}
     </Flex>
