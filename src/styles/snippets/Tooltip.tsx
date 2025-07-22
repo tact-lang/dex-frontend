@@ -34,7 +34,8 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(function T
         <ChakraTooltip.Positioner>
           <ChakraTooltip.Content
             ref={ref}
-            {...contentProps} data-testid="tooltip"
+            {...contentProps}
+            data-testid='tooltip'
           >
             {showArrow && (
               <ChakraTooltip.Arrow>

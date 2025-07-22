@@ -48,8 +48,14 @@ const SwapProgress: React.FC<SwapProgressProps> = ({
   const hasError = SWAP_STEPS.some((step) => stepStatuses[step.id] === 'error')
 
   return (
-    <div className="swap-progress-overlay" data-testid='swap-progress-overlay'>
-      <div className="swap-progress-modal" data-testid='swap-progress-modal'>
+    <div
+      className='swap-progress-overlay'
+      data-testid='swap-progress-overlay'
+    >
+      <div
+        className='swap-progress-modal'
+        data-testid='swap-progress-modal'
+      >
         <div className='swap-progress-header'>
           <h3 className='swap-progress-title'>
             {isCompleted ? 'Swap Completed!' : hasError ? 'Swap Failed' : 'Processing Swap'}
@@ -69,7 +75,10 @@ const SwapProgress: React.FC<SwapProgressProps> = ({
           )}
         </div>
 
-        <div className="swap-progress-steps" data-testid='swap-progress-steps'>
+        <div
+          className='swap-progress-steps'
+          data-testid='swap-progress-steps'
+        >
           {SWAP_STEPS.map((step) => {
             const status = stepStatuses[step.id]
             return (
@@ -89,7 +98,7 @@ const SwapProgress: React.FC<SwapProgressProps> = ({
           className='swap-progress-close'
           onClick={onClose}
           disabled={!isCompleted && !hasError}
-          data-testid="swap-progress-close-button"
+          data-testid='swap-progress-close-button'
         >
           {isCompleted || hasError ? 'Close' : 'Processing...'}
         </button>

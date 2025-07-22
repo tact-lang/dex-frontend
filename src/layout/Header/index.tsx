@@ -14,12 +14,12 @@ const Header: FC = () => {
       marginTop={3.5}
       justifyContent={'space-between'}
       alignItems={'center'}
-      data-testid="header"
+      data-testid='header'
     >
       <Image
         src={logo}
         height={9}
-        data-testid="logo"
+        data-testid='logo'
       />
       <Flex
         gap={9}
@@ -38,14 +38,14 @@ const Header: FC = () => {
           _focus={{
             outline: 'none',
           }}
-          data-testid="github-link"
+          data-testid='github-link'
         >
           GitHub
         </Link>
         <Button
           height={9}
           onClick={open}
-          data-testid="connect-wallet-button"
+          data-testid='connect-wallet-button'
         >
           Connect wallet
         </Button>

@@ -9,7 +9,7 @@ import {
   Image,
   Button,
   Badge,
-  Separator
+  Separator,
 } from '@chakra-ui/react'
 import { useColorModeValue } from './ui/color-mode'
 import { useTonAddress, useTonConnectUI } from '@tonconnect/ui-react'
@@ -30,9 +30,7 @@ type Props = {
 }
 
 // Popular tokens for quick selection
-const POPULAR_TOKENS = [
-  { symbol: 'TON', name: 'TON', logo: TonLogo }
-]
+const POPULAR_TOKENS = [{ symbol: 'TON', name: 'TON', logo: TonLogo }]
 
 export default function TokenSelectorModal({
   isOpen,
@@ -41,7 +39,7 @@ export default function TokenSelectorModal({
   onSelect,
   setJettonAddressStatus,
   setVaultAddress,
-  selectedToken
+  selectedToken,
 }: Props) {
   const [searchQuery, setSearchQuery] = useState('')
   const [searchedTokens, setSearchedTokens] = useState<Token[]>([])
@@ -86,17 +84,17 @@ export default function TokenSelectorModal({
             onSelect: resolve,
           }).catch(reject)
         })
-        
-         const isDuplicate = tokens.some(token => {
-           if (foundToken.type === 'jetton' && token.type === 'jetton') {
-             return token.address === foundToken.address
-           }
-           if (foundToken.type === 'ton' && token.type === 'ton') {
-             return true
-           }
-           return false
-         })
-        
+
+        const isDuplicate = tokens.some((token) => {
+          if (foundToken.type === 'jetton' && token.type === 'jetton') {
+            return token.address === foundToken.address
+          }
+          if (foundToken.type === 'ton' && token.type === 'ton') {
+            return true
+          }
+          return false
+        })
+
         if (!isDuplicate) {
           setSearchedTokens([foundToken])
         } else {
@@ -118,17 +116,17 @@ export default function TokenSelectorModal({
   }, [searchQuery, tonConnectUI, network, tokens, setVaultAddress, setJettonAddressStatus])
 
   // Filter tokens by search query
-  const filteredTokens = tokens.filter(token => {
+  const filteredTokens = tokens.filter((token) => {
     if (!searchQuery) return true
-    
+
     // If searching by contract address, don't show main tokens
     if (isContractAddress(searchQuery)) return false
-    
+
     const query = searchQuery.toLowerCase()
     const name = token.name?.toLowerCase() || ''
     const symbol = token.symbol?.toLowerCase() || ''
     const address = token.type === 'jetton' ? token.address?.toLowerCase() || '' : ''
-    
+
     return name.includes(query) || symbol.includes(query) || address.includes(query)
   })
 
@@ -142,17 +140,17 @@ export default function TokenSelectorModal({
   // Check if token is already selected in the opposite field
   const isTokenDisabled = (token: Token) => {
     if (!selectedToken) return false
-    
+
     // For TON tokens, compare by type
     if (token.type === 'ton' && selectedToken.type === 'ton') {
       return true
     }
-    
+
     // For jetton tokens, compare by address
     if (token.type === 'jetton' && selectedToken.type === 'jetton') {
       return token.address === selectedToken.address
     }
-    
+
     return false
   }
 
@@ -170,168 +168,259 @@ export default function TokenSelectorModal({
     return num.toFixed(4)
   }
 
-  const truncateAddress = (addr: string) => 
+  const truncateAddress = (addr: string) =>
     addr.length > 12 ? `${addr.slice(0, 6)}...${addr.slice(-6)}` : addr
 
   return (
-    <Dialog.Root open={isOpen} onOpenChange={(details) => !details.open && onClose()} size="md" placement="center">
-      <Dialog.Backdrop/>
+    <Dialog.Root
+      open={isOpen}
+      onOpenChange={(details) => !details.open && onClose()}
+      size='md'
+      placement='center'
+    >
+      <Dialog.Backdrop />
       <Dialog.Positioner backdropFilter={'blur(4px)'}>
-        <Dialog.Content bg={bgColor} maxH="80vh" data-testid="token-selector-modal">
+        <Dialog.Content
+          bg={bgColor}
+          maxH='80vh'
+          data-testid='token-selector-modal'
+        >
           <Dialog.Header pb={2}>
-            <Dialog.Title fontSize="xl" fontWeight="bold">Select token</Dialog.Title>
+            <Dialog.Title
+              fontSize='xl'
+              fontWeight='bold'
+            >
+              Select token
+            </Dialog.Title>
           </Dialog.Header>
           <Dialog.CloseTrigger />
-          
+
           <Dialog.Body pb={6}>
-          <Stack gap={4}>
-            {/* Search */}
-            <Box position="relative">
-              <Input
-                placeholder="Search token or address"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                borderColor={borderColor}
-                _focus={{ borderColor: 'blue.500', boxShadow: '0 0 0 1px blue.500' }}
-                pl={10}
-                data-testid="token-search-input"
-              />
-              <Box position="absolute" left={3} top="50%" transform="translateY(-50%)" pointerEvents="none">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-                </svg>
-              </Box>
-            </Box>
-
-            {/* Popular */}
-            {!isContractAddress(searchQuery) && (
-              <Box>
-                <Flex gap={2} flexWrap="wrap">
-                  {POPULAR_TOKENS.map((token) => {
-                    const foundToken = tokens.find(t => t.symbol === token.symbol)
-                    const isDisabled = foundToken ? isTokenDisabled(foundToken) : false
-                    
-                    return (
-                    <Box
-                      key={token.symbol}
-                      as="button"
-                      onClick={() => {
-                        if (foundToken && !isDisabled) handleTokenSelect(foundToken)
-                      }}
-                      bg={isDisabled ? useColorModeValue('gray.50', 'gray.800') : useColorModeValue('gray.100', 'gray.700')}
-                      _hover={!isDisabled ? { bg: useColorModeValue('gray.200', 'gray.600') } : {}}
-                      borderRadius="full"
-                      px={3}
-                      py={2}
-                      cursor={isDisabled ? "not-allowed" : "pointer"}
-                      transition="all 0.2s"
-                      border="1px solid"
-                      borderColor={useColorModeValue('gray.200', 'gray.600')}
-                      opacity={isDisabled ? 0.5 : 1}
-                    >
-                      <Flex align="center" gap={2}>
-                        <Image
-                            src={token.logo}
-                            alt={token.name}
-                            boxSize="20px"
-                            borderRadius="full"
-                          />
-                        <Text fontSize="sm" fontWeight="medium">{token.symbol}</Text>
-                      </Flex>
-                    </Box>
-                    )
-                  })}
-                </Flex>
-              </Box>
-            )}
-
-            <Separator />
-
-            <Box>
-              <Flex align="center" gap={2} mb={3}>
-                <Text fontSize="sm" color="gray.500" fontWeight="medium">
-                  {isContractAddress(searchQuery) 
-                    ? 'SEARCH BY ADDRESS' 
-                    : (userAddress ? 'MY TOKENS' : 'ALL TOKENS')
-                  }
-                </Text>
-              </Flex>
-              
-              <Stack gap={1} maxH="300px" overflowY="auto">
-                {isSearching && isContractAddress(searchQuery) && (
-                  <Flex align="center" justify="center" p={4}>
-                    <Text color="gray.500">Searching for token by address...</Text>
-                  </Flex>
-                )}
-                
-                {!isSearching && isContractAddress(searchQuery) && searchedTokens.length === 0 && (
-                  <Flex align="center" justify="center" p={4}>
-                    <Text color="gray.500">Token not found or already in the list</Text>
-                  </Flex>
-                )}
-                
-                {!isSearching && !isContractAddress(searchQuery) && allDisplayTokens.length === 0 && (
-                  <Flex align="center" justify="center" p={4}>
-                    <Text color="gray.500">No tokens found</Text>
-                  </Flex>
-                )}
-                
-                {!isSearching && allDisplayTokens.map((token, index) => {
-                  const isDisabled = isTokenDisabled(token)
-                  
-                  return (
-                  <Flex
-                    key={`${token.type}-${token.symbol}-${index}`}
-                    align="center"
-                    p={3}
-                    borderRadius="md"
-                    cursor={isDisabled ? "not-allowed" : "pointer"}
-                    _hover={!isDisabled ? { bg: hoverBg } : {}}
-                    onClick={() => !isDisabled && handleTokenSelect(token)}
-                    border="1px solid"
-                    borderColor="transparent"
-                    _focus={!isDisabled ? { borderColor: 'blue.500' } : {}}
-                    opacity={isDisabled ? 0.5 : 1}
-                    bg={isDisabled ? useColorModeValue('gray.50', 'gray.800') : 'transparent'}
-                    data-testid={`token-item-${token.symbol}`}
+            <Stack gap={4}>
+              {/* Search */}
+              <Box position='relative'>
+                <Input
+                  placeholder='Search token or address'
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  borderColor={borderColor}
+                  _focus={{ borderColor: 'blue.500', boxShadow: '0 0 0 1px blue.500' }}
+                  pl={10}
+                  data-testid='token-search-input'
+                />
+                <Box
+                  position='absolute'
+                  left={3}
+                  top='50%'
+                  transform='translateY(-50%)'
+                  pointerEvents='none'
+                >
+                  <svg
+                    width='16'
+                    height='16'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    xmlns='http://www.w3.org/2000/svg'
                   >
-                    <Image
-                      src={getLogoSrc(token)}
-                      w={10}
-                      h={10}
-                      borderRadius="full"
-                      mr={3}
+                    <path
+                      d='M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z'
+                      stroke='currentColor'
+                      strokeWidth='2'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      fill='none'
                     />
-                    
-                    <Box flex={1}>
-                      <Flex align="center" gap={2}>
-                        <Text fontWeight="bold">{token.name}</Text>
-                        {searchedTokens.includes(token) && (
-                          <Badge size="sm" colorScheme="green">
-                            Found
-                          </Badge>
-                        )}
-                      </Flex>
-                      <Text fontSize="sm" color="gray.500">
-                        {token.type === 'jetton' && token.address 
-                          ? truncateAddress(token.address)
-                          : token.symbol
-                        }
-                      </Text>
-                    </Box>
-                    
-                    <Box textAlign="right">
-                      <Text fontWeight="bold">{formatBalance(token.balance)}</Text>
-                      <Text fontSize="sm" color="gray.500">$0.64</Text>
-                    </Box>
+                  </svg>
+                </Box>
+              </Box>
+
+              {/* Popular */}
+              {!isContractAddress(searchQuery) && (
+                <Box>
+                  <Flex
+                    gap={2}
+                    flexWrap='wrap'
+                  >
+                    {POPULAR_TOKENS.map((token) => {
+                      const foundToken = tokens.find((t) => t.symbol === token.symbol)
+                      const isDisabled = foundToken ? isTokenDisabled(foundToken) : false
+
+                      return (
+                        <Box
+                          key={token.symbol}
+                          as='button'
+                          onClick={() => {
+                            if (foundToken && !isDisabled) handleTokenSelect(foundToken)
+                          }}
+                          bg={
+                            isDisabled
+                              ? useColorModeValue('gray.50', 'gray.800')
+                              : useColorModeValue('gray.100', 'gray.700')
+                          }
+                          _hover={
+                            !isDisabled ? { bg: useColorModeValue('gray.200', 'gray.600') } : {}
+                          }
+                          borderRadius='full'
+                          px={3}
+                          py={2}
+                          cursor={isDisabled ? 'not-allowed' : 'pointer'}
+                          transition='all 0.2s'
+                          border='1px solid'
+                          borderColor={useColorModeValue('gray.200', 'gray.600')}
+                          opacity={isDisabled ? 0.5 : 1}
+                        >
+                          <Flex
+                            align='center'
+                            gap={2}
+                          >
+                            <Image
+                              src={token.logo}
+                              alt={token.name}
+                              boxSize='20px'
+                              borderRadius='full'
+                            />
+                            <Text
+                              fontSize='sm'
+                              fontWeight='medium'
+                            >
+                              {token.symbol}
+                            </Text>
+                          </Flex>
+                        </Box>
+                      )
+                    })}
                   </Flex>
-                  )
-                })}
-              </Stack>
-            </Box>
+                </Box>
+              )}
 
+              <Separator />
 
-          </Stack>
+              <Box>
+                <Flex
+                  align='center'
+                  gap={2}
+                  mb={3}
+                >
+                  <Text
+                    fontSize='sm'
+                    color='gray.500'
+                    fontWeight='medium'
+                  >
+                    {isContractAddress(searchQuery)
+                      ? 'SEARCH BY ADDRESS'
+                      : userAddress
+                        ? 'MY TOKENS'
+                        : 'ALL TOKENS'}
+                  </Text>
+                </Flex>
+
+                <Stack
+                  gap={1}
+                  maxH='300px'
+                  overflowY='auto'
+                >
+                  {isSearching && isContractAddress(searchQuery) && (
+                    <Flex
+                      align='center'
+                      justify='center'
+                      p={4}
+                    >
+                      <Text color='gray.500'>Searching for token by address...</Text>
+                    </Flex>
+                  )}
+
+                  {!isSearching &&
+                    isContractAddress(searchQuery) &&
+                    searchedTokens.length === 0 && (
+                      <Flex
+                        align='center'
+                        justify='center'
+                        p={4}
+                      >
+                        <Text color='gray.500'>Token not found or already in the list</Text>
+                      </Flex>
+                    )}
+
+                  {!isSearching &&
+                    !isContractAddress(searchQuery) &&
+                    allDisplayTokens.length === 0 && (
+                      <Flex
+                        align='center'
+                        justify='center'
+                        p={4}
+                      >
+                        <Text color='gray.500'>No tokens found</Text>
+                      </Flex>
+                    )}
+
+                  {!isSearching &&
+                    allDisplayTokens.map((token, index) => {
+                      const isDisabled = isTokenDisabled(token)
+
+                      return (
+                        <Flex
+                          key={`${token.type}-${token.symbol}-${index}`}
+                          align='center'
+                          p={3}
+                          borderRadius='md'
+                          cursor={isDisabled ? 'not-allowed' : 'pointer'}
+                          _hover={!isDisabled ? { bg: hoverBg } : {}}
+                          onClick={() => !isDisabled && handleTokenSelect(token)}
+                          border='1px solid'
+                          borderColor='transparent'
+                          _focus={!isDisabled ? { borderColor: 'blue.500' } : {}}
+                          opacity={isDisabled ? 0.5 : 1}
+                          bg={isDisabled ? useColorModeValue('gray.50', 'gray.800') : 'transparent'}
+                          data-testid={`token-item-${token.symbol}`}
+                        >
+                          <Image
+                            src={getLogoSrc(token)}
+                            w={10}
+                            h={10}
+                            borderRadius='full'
+                            mr={3}
+                          />
+
+                          <Box flex={1}>
+                            <Flex
+                              align='center'
+                              gap={2}
+                            >
+                              <Text fontWeight='bold'>{token.name}</Text>
+                              {searchedTokens.includes(token) && (
+                                <Badge
+                                  size='sm'
+                                  colorScheme='green'
+                                >
+                                  Found
+                                </Badge>
+                              )}
+                            </Flex>
+                            <Text
+                              fontSize='sm'
+                              color='gray.500'
+                            >
+                              {token.type === 'jetton' && token.address
+                                ? truncateAddress(token.address)
+                                : token.symbol}
+                            </Text>
+                          </Box>
+
+                          <Box textAlign='right'>
+                            <Text fontWeight='bold'>{formatBalance(token.balance)}</Text>
+                            <Text
+                              fontSize='sm'
+                              color='gray.500'
+                            >
+                              $0.64
+                            </Text>
+                          </Box>
+                        </Flex>
+                      )
+                    })}
+                </Stack>
+              </Box>
+            </Stack>
           </Dialog.Body>
         </Dialog.Content>
       </Dialog.Positioner>

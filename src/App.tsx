@@ -9,12 +9,29 @@ import './styles/JettonMinter.css'
 export const App: FC = () => {
   return (
     <Router basename='/dex-frontend'>
-      <Box className='app' minH="100vh" data-testid="app">
-        <Box as="nav" className='app-nav' data-testid="app-nav">
-          <Container maxW="container.xl">
-            <Flex justify="space-between" align="center" className='nav-content'>
+      <Box
+        className='app'
+        minH='100vh'
+        data-testid='app'
+      >
+        <Box
+          as='nav'
+          className='app-nav'
+          data-testid='app-nav'
+        >
+          <Container maxW='container.xl'>
+            <Flex
+              justify='space-between'
+              align='center'
+              className='nav-content'
+            >
               <Box className='nav-brand'>
-                <Box className='nav-logo' data-testid="nav-logo">🦖 T-Dex</Box>
+                <Box
+                  className='nav-logo'
+                  data-testid='nav-logo'
+                >
+                  🦖 T-Dex
+                </Box>
               </Box>
               <Box className='nav-links'>
                 <TonConnectButton />
@@ -22,7 +39,12 @@ export const App: FC = () => {
             </Flex>
           </Container>
         </Box>
-        <Container maxW={{ base: "full", md: "lg" }} px={{ base: 0, md: 8 }} py={12} data-testid="main-container">
+        <Container
+          maxW={{ base: 'full', md: 'lg' }}
+          px={{ base: 0, md: 8 }}
+          py={12}
+          data-testid='main-container'
+        >
           <Routes>
             <Route
               path='/'

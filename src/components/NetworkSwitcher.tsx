@@ -10,18 +10,21 @@ interface NetworkSwitcherProps {
 
 export const NetworkSwitcher: FC<NetworkSwitcherProps> = ({ network, onChange }) => {
   return (
-    <div className='network-switcher' data-testid="network-switcher">
+    <div
+      className='network-switcher'
+      data-testid='network-switcher'
+    >
       <button
         className={`network-button ${network === 'testnet' ? 'active' : ''}`}
         onClick={() => onChange('testnet')}
-        data-testid="network-testnet-button"
+        data-testid='network-testnet-button'
       >
         Testnet
       </button>
       <button
         className={`network-button ${network === 'mainnet' ? 'active' : ''}`}
         onClick={() => onChange('mainnet')}
-        data-testid="network-mainnet-button"
+        data-testid='network-mainnet-button'
       >
         Mainnet
       </button>

@@ -79,103 +79,120 @@ export default function SlippageSettingsDialog({
   return (
     <Dialog.Root
       open={isOpen}
-      placement="center"
+      placement='center'
       onOpenChange={({ open }) => !open && onClose()}
     >
       <Portal>
         <Dialog.Backdrop />
-        <Dialog.Positioner backdropFilter="blur(4px)">
-          <Dialog.Content maxW="md" mx={4} bg={bgColor} data-testid="slippage-settings-dialog">
+        <Dialog.Positioner backdropFilter='blur(4px)'>
+          <Dialog.Content
+            maxW='md'
+            mx={4}
+            bg={bgColor}
+            data-testid='slippage-settings-dialog'
+          >
             <Dialog.Header>
               <Dialog.Title>Settings</Dialog.Title>
             </Dialog.Header>
             <Dialog.Body>
               <Stack gap={4}>
                 <Box>
-                  <Text fontSize="sm" fontWeight="medium" mb={3}>
+                  <Text
+                    fontSize='sm'
+                    fontWeight='medium'
+                    mb={3}
+                  >
                     Max Slippage
                   </Text>
-                  <Group attached w={'full'}>
+                  <Group
+                    attached
+                    w={'full'}
+                  >
                     <Text
-                      fontSize="sm"
-                      color="gray.600"
-                      bg="gray.50"
+                      fontSize='sm'
+                      color='gray.600'
+                      bg='gray.50'
                       px={3}
                       py={2}
-                      border="1px solid"
-                      borderColor="gray.200"
+                      border='1px solid'
+                      borderColor='gray.200'
                       borderRightWidth={0}
-                      borderTopLeftRadius="md"
-                      borderBottomLeftRadius="md"
-                      display="flex"
-                      alignItems="center"
-                      minW="fit-content"
+                      borderTopLeftRadius='md'
+                      borderBottomLeftRadius='md'
+                      display='flex'
+                      alignItems='center'
+                      minW='fit-content'
                     >
                       Slippage
                     </Text>
                     <Input
-                      type="text"
+                      type='text'
                       value={customSlippage}
                       onChange={handleCustomSlippageChange}
                       onBlur={handleCustomSlippageBlur}
                       placeholder={'1'}
-                      size="md"
+                      size='md'
                       flex={1}
-                      textAlign="center"
-                      border="1px solid"
-                      borderColor="gray.200"
+                      textAlign='center'
+                      border='1px solid'
+                      borderColor='gray.200'
                       borderRadius={0}
                       _focus={{
                         borderColor: 'gray.200',
                         boxShadow: '0 0 0 1px gray.200',
                       }}
-                      data-testid="slippage-input"
+                      data-testid='slippage-input'
                     />
                     <Text
-                      fontSize="sm"
-                      color="gray.600"
-                      bg="gray.50"
+                      fontSize='sm'
+                      color='gray.600'
+                      bg='gray.50'
                       px={3}
                       py={2}
-                      border="1px solid"
-                      borderColor="gray.200"
+                      border='1px solid'
+                      borderColor='gray.200'
                       borderLeftWidth={0}
-                      borderTopRightRadius="md"
-                      borderBottomRightRadius="md"
-                      display="flex"
-                      alignItems="center"
-                      minW="fit-content"
+                      borderTopRightRadius='md'
+                      borderBottomRightRadius='md'
+                      display='flex'
+                      alignItems='center'
+                      minW='fit-content'
                     >
                       %
                     </Text>
                   </Group>
                   {/* Preset slippage chips */}
-                  <HStack gap={3} mt={3} mb={2} justifyContent="flex-end">
+                  <HStack
+                    gap={3}
+                    mt={3}
+                    mb={2}
+                    justifyContent='flex-end'
+                  >
                     {[0.5, 1, 3, 5].map((preset) => {
                       const isSelected = slippage === preset
                       return (
                         <Button
                           key={preset}
-                          size="md"
+                          size='md'
                           variant={isSelected ? 'solid' : 'outline'}
-                          colorPalette="gray"
+                          colorPalette='gray'
                           bg={isSelected ? 'white' : 'transparent'}
                           color={isSelected ? 'black' : 'white'}
-                          borderColor="white"
+                          borderColor='white'
                           onClick={() => handlePresetSlippageClick(preset)}
-                          fontSize="sm"
-                          fontWeight="semibold"
+                          fontSize='sm'
+                          fontWeight='semibold'
                           px={4}
                           py={2}
-                          h="auto"
-                          minH="36px"
-                          borderWidth="2px"
+                          h='auto'
+                          minH='36px'
+                          borderWidth='2px'
                           _hover={{
                             transform: 'translateY(-1px)',
                             bg: isSelected ? 'whiteAlpha.900' : 'whiteAlpha.200',
                             color: isSelected ? 'black' : 'white',
                           }}
-                          transition="all 0.2s"
+                          transition='all 0.2s'
                           data-testid={`slippage-preset-${preset}`}
                         >
                           {preset}%
@@ -183,24 +200,35 @@ export default function SlippageSettingsDialog({
                       )
                     })}
                   </HStack>
-                  <Text fontSize="xs" color="gray.500" mt={2}>
-                    Your transaction will revert if the price changes unfavorably
-                    by more than this percentage.
+                  <Text
+                    fontSize='xs'
+                    color='gray.500'
+                    mt={2}
+                  >
+                    Your transaction will revert if the price changes unfavorably by more than this
+                    percentage.
                   </Text>
                 </Box>
               </Stack>
             </Dialog.Body>
-            <Dialog.CloseTrigger top="0" insetEnd="-12" asChild>
-              <CloseButton bg="bg" size="sm" />
+            <Dialog.CloseTrigger
+              top='0'
+              insetEnd='-12'
+              asChild
+            >
+              <CloseButton
+                bg='bg'
+                size='sm'
+              />
             </Dialog.CloseTrigger>
             <Dialog.Footer>
               <Button
                 onClick={onClose}
-                colorPalette="blue"
-                border="none"
+                colorPalette='blue'
+                border='none'
                 _focus={{ border: 'none', boxShadow: 'none' }}
                 _focusVisible={{ border: 'none', boxShadow: 'none' }}
-                data-testid="slippage-done-button"
+                data-testid='slippage-done-button'
               >
                 Done
               </Button>

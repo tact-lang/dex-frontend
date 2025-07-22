@@ -6,7 +6,7 @@ const Footer: FC = () => {
     <Flex
       as={'footer'}
       height={20}
-      data-testid="footer"
+      data-testid='footer'
     >
       <p>Footer</p>
     </Flex>
