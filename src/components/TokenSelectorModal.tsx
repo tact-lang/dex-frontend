@@ -51,6 +51,15 @@ export default function TokenSelectorModal({
   const bgColor = useColorModeValue('white', 'gray.800')
   const borderColor = useColorModeValue('gray.200', 'gray.600')
   const hoverBg = useColorModeValue('gray.50', 'gray.700')
+  
+  // Color values for popular tokens
+  const popularTokenBg = useColorModeValue('gray.100', 'gray.700')
+  const popularTokenDisabledBg = useColorModeValue('gray.50', 'gray.800')
+  const popularTokenHoverBg = useColorModeValue('gray.200', 'gray.600')
+  const popularTokenBorderColor = useColorModeValue('gray.200', 'gray.600')
+  
+  // Color values for token items
+  const tokenItemDisabledBg = useColorModeValue('gray.50', 'gray.800')
 
   useEffect(() => {
     if (!isOpen) {
@@ -254,11 +263,11 @@ export default function TokenSelectorModal({
                           }}
                           bg={
                             isDisabled
-                              ? useColorModeValue('gray.50', 'gray.800')
-                              : useColorModeValue('gray.100', 'gray.700')
+                              ? popularTokenDisabledBg
+                              : popularTokenBg
                           }
                           _hover={
-                            !isDisabled ? { bg: useColorModeValue('gray.200', 'gray.600') } : {}
+                            !isDisabled ? { bg: popularTokenHoverBg } : {}
                           }
                           borderRadius='full'
                           px={3}
@@ -266,7 +275,7 @@ export default function TokenSelectorModal({
                           cursor={isDisabled ? 'not-allowed' : 'pointer'}
                           transition='all 0.2s'
                           border='1px solid'
-                          borderColor={useColorModeValue('gray.200', 'gray.600')}
+                          borderColor={popularTokenBorderColor}
                           opacity={isDisabled ? 0.5 : 1}
                         >
                           <Flex
@@ -370,7 +379,7 @@ export default function TokenSelectorModal({
                           borderColor='transparent'
                           _focus={!isDisabled ? { borderColor: 'blue.500' } : {}}
                           opacity={isDisabled ? 0.5 : 1}
-                          bg={isDisabled ? useColorModeValue('gray.50', 'gray.800') : 'transparent'}
+                          bg={isDisabled ? tokenItemDisabledBg : 'transparent'}
                           data-testid={`token-item-${token.symbol}`}
                         >
                           <Image

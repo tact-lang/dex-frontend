@@ -20,8 +20,7 @@ export const getFactory = async (ton: TonClient) => {
     const factory = ton.open(Factory.fromAddress(DEX_FACTORY_ADDRESS))
 
     return factory
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (e) {
+  } catch (_) {
     toaster.create({
       title: 'Error',
       description: 'Failed to get DEX factory',
@@ -41,8 +40,7 @@ export const getTonVault = async (ton: TonClient) => {
 
     const tonVault = ton.open(TonVault.fromAddress(TON_VAULT_ADDRESS))
     return tonVault
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (e) {
+  } catch (_) {
     toaster.create({
       title: 'Error',
       description: 'Failed to get TON Vault',
@@ -82,8 +80,7 @@ export const getAmmPoolFromAddress = async (ton: TonClient, ammPoolAddress: Addr
 
     const ammPool = ton.open(AmmPool.fromAddress(ammPoolAddress))
     return ammPool
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (e) {
+  } catch (_) {
     toaster.create({
       title: 'Error',
       description: 'AMM Pool for this pair of assets is not initialized',

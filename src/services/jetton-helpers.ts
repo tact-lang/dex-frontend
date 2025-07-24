@@ -51,8 +51,7 @@ export const displayContentCell = async (content: Cell) => {
     console.log(`Token name: ${result.name}`)
     console.log(`Description: ${result.description}`)
     console.log(`Image: ${chalk.underline(result.image)}`)
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (e) {
+  } catch (_) {
     console.error('Failed to parse metadata from cell')
   }
 }

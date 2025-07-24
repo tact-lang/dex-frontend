@@ -178,7 +178,7 @@ export default function Swap() {
     }
 
     updateToAmount()
-  }, [debouncedFromAmount, toToken, tonConnectUI, network, fromToken, lastChangedField])
+  }, [debouncedFromAmount, toToken, tonConnectUI, network, fromToken, lastChangedField, slippage])
 
   useEffect(() => {
     if (!debouncedToAmount || !toToken || lastChangedField !== 'to') return
@@ -197,7 +197,7 @@ export default function Swap() {
     }
 
     updateFromAmount()
-  }, [debouncedToAmount, toToken, tonConnectUI, network, fromToken, lastChangedField])
+  }, [debouncedToAmount, toToken, tonConnectUI, network, fromToken, lastChangedField, slippage])
 
   const handleSwapDirection = () => {
     if (!toToken || !fromToken) return
