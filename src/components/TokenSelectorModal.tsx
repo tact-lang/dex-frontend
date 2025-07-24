@@ -51,13 +51,13 @@ export default function TokenSelectorModal({
   const bgColor = useColorModeValue('white', 'gray.800')
   const borderColor = useColorModeValue('gray.200', 'gray.600')
   const hoverBg = useColorModeValue('gray.50', 'gray.700')
-  
+
   // Color values for popular tokens
   const popularTokenBg = useColorModeValue('gray.100', 'gray.700')
   const popularTokenDisabledBg = useColorModeValue('gray.50', 'gray.800')
   const popularTokenHoverBg = useColorModeValue('gray.200', 'gray.600')
   const popularTokenBorderColor = useColorModeValue('gray.200', 'gray.600')
-  
+
   // Color values for token items
   const tokenItemDisabledBg = useColorModeValue('gray.50', 'gray.800')
 
@@ -261,14 +261,8 @@ export default function TokenSelectorModal({
                           onClick={() => {
                             if (foundToken && !isDisabled) handleTokenSelect(foundToken)
                           }}
-                          bg={
-                            isDisabled
-                              ? popularTokenDisabledBg
-                              : popularTokenBg
-                          }
-                          _hover={
-                            !isDisabled ? { bg: popularTokenHoverBg } : {}
-                          }
+                          bg={isDisabled ? popularTokenDisabledBg : popularTokenBg}
+                          _hover={!isDisabled ? { bg: popularTokenHoverBg } : {}}
                           borderRadius='full'
                           px={3}
                           py={2}
