@@ -59,8 +59,8 @@ export const SwapSection: React.FC<SwapSectionProps> = ({
       boxShadow: 'none',
       outline: 'none',
     },
-    _hover: { 
-      borderColor: 'gray.300'
+    _hover: {
+      borderColor: 'gray.300',
     },
   }
   return (
@@ -96,7 +96,10 @@ export const SwapSection: React.FC<SwapSectionProps> = ({
           )}
         </Text>
       </Flex>
-      <Flex align='center' gap={2}>
+      <Flex
+        align='center'
+        gap={2}
+      >
         <Button
           onClick={onTokenSelect}
           variant='outline'
@@ -134,11 +137,7 @@ export const SwapSection: React.FC<SwapSectionProps> = ({
               </Box>
             </Flex>
           ) : (
-            <Text
-              fontSize='sm'
-            >
-              Select token
-            </Text>
+            <Text fontSize='sm'>Select token</Text>
           )}
         </Button>
         <Stack
