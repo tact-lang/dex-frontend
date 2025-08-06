@@ -30,49 +30,38 @@ export const SwapSection: React.FC<SwapSectionProps> = ({
   const defaultInputStyle = {
     border: '1px solid',
     borderColor: 'gray.200',
-    borderLeftWidth: 0,
-    borderTopLeftRadius: 0,
-    borderBottomLeftRadius: 0,
-    borderTopRightRadius: 'md',
-    borderBottomRightRadius: 'md',
+    borderRadius: 'md',
     _focus: {
       border: '1px solid',
-      borderColor: 'gray.200',
-      borderLeftWidth: 0,
+      borderColor: 'gray.300',
       boxShadow: 'none',
       outline: 'none',
     },
     _focusVisible: {
       border: '1px solid',
-      borderColor: 'gray.200',
-      borderLeftWidth: 0,
+      borderColor: 'gray.300',
       boxShadow: 'none',
       outline: 'none',
     },
-    _hover: { borderColor: 'gray.300', borderLeftWidth: 0 },
+    _hover: { borderColor: 'gray.300' },
   }
 
   const defaultButtonStyle = {
+    bg: 'transparent',
+    borderRadius: 'md',
     border: '1px solid',
     borderColor: 'gray.200',
-    borderRightWidth: 0,
-    borderTopLeftRadius: 'md',
-    borderBottomLeftRadius: 'md',
-    borderTopRightRadius: 0,
-    borderBottomRightRadius: 0,
     _focus: {
-      border: '1px solid',
-      borderColor: 'gray.200',
-      borderRightWidth: 0,
       boxShadow: 'none',
+      outline: 'none',
     },
     _focusVisible: {
-      border: '1px solid',
-      borderColor: 'gray.200',
-      borderRightWidth: 0,
       boxShadow: 'none',
+      outline: 'none',
     },
-    _hover: { borderColor: 'gray.300', borderRightWidth: 0 },
+    _hover: { 
+      borderColor: 'gray.300'
+    },
   }
   return (
     <Box data-testid='swap-section'>
@@ -107,7 +96,7 @@ export const SwapSection: React.FC<SwapSectionProps> = ({
           )}
         </Text>
       </Flex>
-      <Flex align='center'>
+      <Flex align='center' gap={2}>
         <Button
           onClick={onTokenSelect}
           variant='outline'
@@ -146,7 +135,6 @@ export const SwapSection: React.FC<SwapSectionProps> = ({
             </Flex>
           ) : (
             <Text
-              color='gray.500'
               fontSize='sm'
             >
               Select token

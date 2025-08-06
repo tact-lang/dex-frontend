@@ -526,82 +526,86 @@ export default function Swap() {
         </Flex>
       </Flex>
 
-      <Stack
-        gap={4}
-        align='stretch'
+      {/* Общий контейнер для секций обмена */}
+      <Box
+        bg='gray.800'
+        borderRadius='xl'
+        p={6}
+        data-testid='swap-sections-container'
       >
-        <SwapSection
-          title='You send'
-          token={fromToken}
-          amount={fromAmount}
-          onAmountChange={(value) =>
-            handleFromAmountChange({ target: { value } } as React.ChangeEvent<HTMLInputElement>)
-          }
-          onTokenSelect={onFromTokenDialogOpen}
-          balance={formatBalanceForDisplay(fromToken)}
-          isBalanceClickable={isBalanceClickable(fromToken)}
-          onBalanceClick={() => setAmountFromBalance(1)}
-          getTokenLogoSrc={getTokenLogoSrc}
-          slippageInfo={
-            lastChangedField === 'to' && toAmount && toToken
-              ? `Max amount to pay: ${calculateMaxAmountWithSlippage(fromAmount, slippage)} ${fromToken.symbol}`
-              : undefined
-          }
-        />
+        <Stack
+          gap={2}
+          align='stretch'
+        >
+          <SwapSection
+            title='You send'
+            token={fromToken}
+            amount={fromAmount}
+            onAmountChange={(value) =>
+              handleFromAmountChange({ target: { value } } as React.ChangeEvent<HTMLInputElement>)
+            }
+            onTokenSelect={onFromTokenDialogOpen}
+            balance={formatBalanceForDisplay(fromToken)}
+            isBalanceClickable={isBalanceClickable(fromToken)}
+            onBalanceClick={() => setAmountFromBalance(1)}
+            getTokenLogoSrc={getTokenLogoSrc}
+            slippageInfo={
+              lastChangedField === 'to' && toAmount && toToken
+                ? `Max amount to pay: ${calculateMaxAmountWithSlippage(fromAmount, slippage)} ${fromToken.symbol}`
+                : undefined
+            }
+          />
 
-        <Flex justify='center'>
-          <IconButton
-            aria-label=''
-            onClick={handleSwapDirection}
-            // variant="outline"
-            size='md'
-            borderRadius='full'
-            bg='white'
-            border='none'
-            _hover={{ transform: 'rotate(180deg)' }}
-            _focus={{ border: 'none', boxShadow: 'none' }}
-            _focusVisible={{ border: 'none', boxShadow: 'none' }}
-            transition='all 0.3s ease'
-            data-testid='swap-direction-button'
-          >
-            <svg
-              width='16'
-              height='16'
-              viewBox='0 0 24 24'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
+          <Flex justify='center'>
+            <IconButton
+              onClick={handleSwapDirection}
+              size='md'
+              borderRadius='full'
+              _hover={{ transform: 'rotate(180deg)' }}
+              _focus={{ border: 'none', boxShadow: 'none' }}
+              _focusVisible={{ border: 'none', boxShadow: 'none' }}
+              transition='all 0.3s ease'
+              data-testid='swap-direction-button'
             >
-              <path
-                d='M8 7L12 3M12 3L16 7M12 3V21M16 17L12 21M12 21L8 17'
-                stroke='currentColor'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-              />
-            </svg>
-          </IconButton>
-        </Flex>
+              <svg
+                width='16'
+                height='16'
+                viewBox='0 0 24 24'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <path
+                  d='M8 7L12 3M12 3L16 7M12 3V21M16 17L12 21M12 21L8 17'
+                  stroke='currentColor'
+                  strokeWidth='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                />
+              </svg>
+            </IconButton>
+          </Flex>
 
-        <SwapSection
-          title='You receive'
-          token={toToken || null}
-          amount={toAmount}
-          onAmountChange={(value) =>
-            handleToAmountChange({ target: { value } } as React.ChangeEvent<HTMLInputElement>)
-          }
-          onTokenSelect={onToTokenDialogOpen}
-          balance={toToken ? formatBalanceForDisplay(toToken) : '-'}
+          <SwapSection
+            title='You receive'
+            token={toToken || null}
+            amount={toAmount}
+            onAmountChange={(value) =>
+              handleToAmountChange({ target: { value } } as React.ChangeEvent<HTMLInputElement>)
+            }
+            onTokenSelect={onToTokenDialogOpen}
+            balance={toToken ? formatBalanceForDisplay(toToken) : '-'}
             isBalanceClickable={toToken ? isBalanceClickable(toToken) : false}
             onBalanceClick={() => setAmountFromToBalance(1)}
-          getTokenLogoSrc={getTokenLogoSrc}
-          placeholder='0'
-          slippageInfo={
-            lastChangedField === 'from' && toAmount && toToken
-              ? `Min amount to receive: ${calculateMinAmountWithSlippage(toAmount, slippage)} ${toToken.symbol}`
-              : undefined
-          }
-        />
-      </Stack>
+            getTokenLogoSrc={getTokenLogoSrc}
+            placeholder='0'
+            slippageInfo={
+              lastChangedField === 'from' && toAmount && toToken
+                ? `Min amount to receive: ${calculateMinAmountWithSlippage(toAmount, slippage)} ${toToken.symbol}`
+                : undefined
+            }
+          />
+        </Stack>
+      </Box>
       <Box
         mt={6}
         p={4}
