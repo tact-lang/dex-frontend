@@ -277,6 +277,22 @@ export default function Swap() {
     setLastChangedField('from')
   }
 
+  const setAmountFromToBalance = (fraction: number) => {
+    if (!userAddress || !toToken) return
+
+    const balanceString = toToken.type === 'ton' ? tonBalance : fromNano(toToken.balance)
+    const balance = parseFloat(balanceString.replace(',', '.'))
+    if (isNaN(balance)) return
+
+    const amount = balance * fraction
+    const amountString = amount.toLocaleString('en-US', {
+      useGrouping: false,
+      maximumFractionDigits: 20,
+    })
+    setToAmount(amountString)
+    setLastChangedField('to')
+  }
+
   const handleFromTokenSelect = (token: Token) => {
     setFromToken(token)
     setFromAmount('')
@@ -575,7 +591,8 @@ export default function Swap() {
           }
           onTokenSelect={onToTokenDialogOpen}
           balance={toToken ? formatBalanceForDisplay(toToken) : '-'}
-          isBalanceClickable={false}
+            isBalanceClickable={toToken ? isBalanceClickable(toToken) : false}
+            onBalanceClick={() => setAmountFromToBalance(1)}
           getTokenLogoSrc={getTokenLogoSrc}
           placeholder='0'
           slippageInfo={
