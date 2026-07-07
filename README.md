@@ -1,3 +1,7 @@
+> [!CAUTION]
+> This project is deprecated. For up-to-date version of smart contract examples and UI for them visit
+> the [Contract Monorepo in Tolk](https://github.com/ton-blockchain/acton-contracts/).
+
 # T-Dex
 
 This repo contains wip frontend for [T-Dex](https://github.com/tact-lang/dex)
